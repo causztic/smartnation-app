@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/studybutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginTop="0dp"
+
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/study_beforepress" />
+
+        <ImageButton
+            android:id="@+id/eatbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:padding="0dp"
+
+
+            android:scaleType="fitCenter"
+
+            android:src="@drawable/food_beforepress" />
+    </LinearLayout>
+</LinearLayout>
+
