@@ -27,8 +27,8 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
     private RequestQueue requestQueue;
     private Gson gson;
     private  List<MeetingPlaces> posts=new ArrayList<>();
-    private ArrayList<MeetingPlaces> library=new ArrayList<>();
-    private ArrayList<MeetingPlaces> meeting=new ArrayList<>();
+    private ArrayList<MeetingPlaces> library;
+    private ArrayList<MeetingPlaces> meeting;
     private ImageButton LibraryButton;
     private ImageButton MeetingButton;
 
@@ -64,19 +64,14 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
             posts = Arrays.asList(gson.fromJson(response, MeetingPlaces[].class));
 
             Log.i("PostActivityLib", posts.size() + " posts loaded.");
-            ArrayList<MeetingPlaces> library1=new ArrayList<>();
-            ArrayList<MeetingPlaces> meeting2=new ArrayList<>();
 
             for(MeetingPlaces a:posts)
             {
                 if(a.getMeetingCategory().equalsIgnoreCase("library"))
-                    library1.add(a);
+                    library.add(a);
                 else
-                    meeting2.add(a);
+                    meeting.add(a);
             }
-            library=library1;
-            meeting=meeting2;
-
         }
     };
 
@@ -86,6 +81,7 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
             Log.e("PostActivityLib", error.toString());
         }
     };
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -105,7 +101,6 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
     private void startLibrary() {
         Intent launchLibrary = new Intent(this, LibraryMainActivity.class);
         launchLibrary.putExtra("LIBRARY",library);
-        Log.i("startLibrary",library.toString());
         startActivity(launchLibrary);
     }
     private void startMeeting() {

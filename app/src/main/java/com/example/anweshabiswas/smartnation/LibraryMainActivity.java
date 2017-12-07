@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LibraryMainActivity extends AppCompatActivity {
 
@@ -20,34 +21,22 @@ public class LibraryMainActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
-    private   ArrayList<MeetingPlaces> list;
-    public static MeetingPlaces lvl1;
-    public static MeetingPlaces lvl2;
-    public static MeetingPlaces lvl3;
-
+    private ArrayList<MeetingPlaces> list;
+    private List<Fragment> libraryFragments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3_library);
 
         Intent i = getIntent();
-       list = (ArrayList<MeetingPlaces>) i
+        list = (ArrayList<MeetingPlaces>) i
                 .getSerializableExtra("LIBRARY");
-        Log.i("Library",list.toString());
-
-        for(MeetingPlaces a:list)
-        {
-            if(a.getName().equalsIgnoreCase("Library (1st floor)"))
-            {
-                lvl1 = a;
-                Log.i("library",a.getName());
-            }
-            else
-            if(a.getName().equalsIgnoreCase("Library (2nd floor)"))
-                lvl2=a;
-            else
-                lvl3=a;
-
+        libraryFragments = new ArrayList<>();
+        for (MeetingPlaces item: list){
+            LibraryFragment lf = new LibraryFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("LIBRARY", item);
+            lf.setArguments(bundle);
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -63,24 +52,6 @@ public class LibraryMainActivity extends AppCompatActivity {
 
 
     }
-    public static MeetingPlaces getObj(int pos)
-    {
-        switch(pos)
-        {
-            case 0:
-                return lvl1;
-
-            case 1:
-                return lvl2;
-
-            case 2:
-                return lvl3;
-
-            default:
-                return null;
-        }
-
-    }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -90,22 +61,7 @@ public class LibraryMainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    Library1Fragment lib1 = new Library1Fragment();
-                    return lib1;
-
-                case 1:
-                    Library2Fragment lib2 = new Library2Fragment();
-                    return lib2;
-                case 2:
-                    Library3Fragment lib3 = new Library3Fragment();
-                    return lib3;
-                default:
-                    return null;
-            }
-
-
+            return libraryFragments.get(position);
         }
 
         @Override
