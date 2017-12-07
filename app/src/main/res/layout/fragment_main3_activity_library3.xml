@@ -1,0 +1,62 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+
+<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="0dp"
+            android:scrollbars="vertical">
+
+            <ImageButton
+                android:id="@+id/librarylevel3button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:adjustViewBounds="true"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/library_level3" />
+
+            <TextView
+                android:id="@+id/level3_occupancy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+
+                android:scaleType="fitCenter"
+                android:textAlignment="center"
+
+                android:textSize="30sp" />
+
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barchart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:id="@+id/level1_graphtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitCenter"
+
+                android:text="Peak hours for level 3"
+
+                android:textAlignment="center"
+
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
