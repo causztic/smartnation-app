@@ -53,7 +53,7 @@ public class FoodActivity extends AppCompatActivity implements SearchView.OnQuer
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapt=new RecyclerViewAdapter(this,posts);
-        recyclerView.setAdapter(adapt);
+        recyclerView.setAdapter(adapt); //adapted
 
     }
     private void fetchPosts() {
