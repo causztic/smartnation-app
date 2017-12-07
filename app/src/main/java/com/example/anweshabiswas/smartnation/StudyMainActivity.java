@@ -29,23 +29,26 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
     private  List<MeetingPlaces> posts=new ArrayList<>();
     private ArrayList<MeetingPlaces> library;
     private ArrayList<MeetingPlaces> meeting;
-    private ImageButton LibraryButton;
-    private ImageButton MeetingButton;
+    private ImageButton libraryButton;
+    private ImageButton meetingButton;
+    private boolean hasLoaded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        LibraryButton = (ImageButton)findViewById(R.id.librarybutton);
-        MeetingButton = (ImageButton)findViewById(R.id.meetingbutton2);
+        libraryButton = (ImageButton)findViewById(R.id.librarybutton);
+        meetingButton = (ImageButton)findViewById(R.id.meetingbutton2);
+
         posts=new ArrayList<>();
         library=new ArrayList<>();
         meeting=new ArrayList<>();
+        hasLoaded = false;
 
+        libraryButton.setOnClickListener(this);
+        meetingButton.setOnClickListener(this);
 
-        LibraryButton.setOnClickListener(this);
-        MeetingButton.setOnClickListener(this);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         requestQueue = Volley.newRequestQueue(this);
@@ -61,9 +64,8 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
     private final Response.Listener<String> onPostsLoaded = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
+            hasLoaded = true;
             posts = Arrays.asList(gson.fromJson(response, MeetingPlaces[].class));
-
-            Log.i("PostActivityLib", posts.size() + " posts loaded.");
 
             for(MeetingPlaces a:posts)
             {
@@ -84,18 +86,18 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        if (hasLoaded)
+            switch (v.getId()) {
+                case R.id.librarybutton:
+                    startLibrary();
+                    break;
+                case R.id.meetingbutton2:
+                    startMeeting();
+                    break;
+                default:
+                    break;
 
-            case R.id.librarybutton:
-                startLibrary();
-                break;
-            case R.id.meetingbutton2:
-                startMeeting();
-                break;
-            default:
-                break;
-
-        }
+            }
     }
 
     private void startLibrary() {
