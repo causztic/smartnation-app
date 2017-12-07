@@ -27,6 +27,8 @@ public class FirstMenuMainActivity extends AppCompatActivity {
                 startEat();
             }
         });
+        Intent i= new Intent(getApplicationContext(), MyService.class);
+        startService(i);
        // RedisConnect rc=new RedisConnect();
     }
 
