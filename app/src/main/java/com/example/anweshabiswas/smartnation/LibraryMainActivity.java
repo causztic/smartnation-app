@@ -32,11 +32,13 @@ public class LibraryMainActivity extends AppCompatActivity {
         list = (ArrayList<MeetingPlaces>) i
                 .getSerializableExtra("LIBRARY");
         libraryFragments = new ArrayList<>();
+
         for (MeetingPlaces item: list){
             LibraryFragment lf = new LibraryFragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("LIBRARY", item);
             lf.setArguments(bundle);
+            libraryFragments.add(lf);
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

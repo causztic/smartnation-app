@@ -5,7 +5,6 @@ package com.example.anweshabiswas.smartnation;
  */
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -15,27 +14,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import static android.content.Context.MODE_PRIVATE;
-
 
 public class LibraryFragment extends Fragment
 {
-    MeetingPlaces obj;
-
-    ImageView header;
-    TextView occ;
+    private MeetingPlaces obj;
+    private ImageView header;
+    private TextView occ;
+    private BarChart chart;
+    private List<BarEntry> BARENTRY;
+    private List<String> BarEntryLabels;
+    private BarDataSet Bardataset;
+    private BarData BARDATA;
+    private TextView chartTitle;
 
     @Override
     public void onAttach(Context context) {
@@ -55,11 +58,7 @@ public class LibraryFragment extends Fragment
     {
 
         View rootView = inflater.inflate(R.layout.fragment_main3_activity_library, container, false);
-        BarChart chart ;
-        ArrayList<BarEntry> BARENTRY;
-        ArrayList<String> BarEntryLabels;
-        BarDataSet Bardataset;
-        BarData BARDATA;
+
         obj = (MeetingPlaces) getArguments().get("LIBRARY");
 
         String name= obj.getName();
@@ -67,12 +66,13 @@ public class LibraryFragment extends Fragment
 
         occ=(TextView)rootView.findViewById(R.id.level_occupancy);
         header =(ImageView)rootView.findViewById(R.id.librarylevelbutton);
+        chartTitle = (TextView) rootView.findViewById(R.id.level_graphtitle);
+        chartTitle.setText("Peak hours for " + obj.getName());
+
 
         new LibraryFragment.DownloadHeaderTask(header).execute(headerUrl);
 
         occ.setText(name+": BUSY");
-
-
 
 
         chart = (BarChart) rootView.findViewById(R.id.barchart);
@@ -85,8 +85,7 @@ public class LibraryFragment extends Fragment
         BARENTRY.add(new BarEntry(3f, 4));
         BARENTRY.add(new BarEntry(5f, 5));
 
-
-        BarEntryLabels = new ArrayList<String>();
+        BarEntryLabels = new ArrayList<>();
 
         BarEntryLabels.add("3pm");
         BarEntryLabels.add("4pm");
@@ -103,13 +102,6 @@ public class LibraryFragment extends Fragment
         Bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
 
         chart.setData(BARDATA);
-        /*SharedPreferences sp1=this.getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
-
-        String classNo=sp1.getString("Class", "");
-
-        TextView occupancy = (TextView)rootView.findViewById(R.id.level1_occupancy);
-
-        occupancy.setText(classNo);*/
         chart.invalidate();
         return rootView;
 
@@ -123,10 +115,10 @@ public class LibraryFragment extends Fragment
         }
 
         protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
+            String urlDisplay = urls[0];
             Bitmap mIcon11 = null;
             try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
+                InputStream in = new java.net.URL(urlDisplay).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
