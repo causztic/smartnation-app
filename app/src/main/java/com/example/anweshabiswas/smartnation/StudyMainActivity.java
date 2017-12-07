@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,6 +32,7 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
     private ArrayList<MeetingPlaces> meeting;
     private ImageButton libraryButton;
     private ImageButton meetingButton;
+    private ProgressBar progressBar;
     private boolean hasLoaded;
 
     @Override
@@ -39,7 +41,8 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_main2);
 
         libraryButton = (ImageButton)findViewById(R.id.librarybutton);
-        meetingButton = (ImageButton)findViewById(R.id.meetingbutton2);
+        meetingButton = (ImageButton)findViewById(R.id.meetingbutton);
+        progressBar   = (ProgressBar) findViewById(R.id.progressBar);
 
         posts=new ArrayList<>();
         library=new ArrayList<>();
@@ -65,6 +68,7 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
         @Override
         public void onResponse(String response) {
             hasLoaded = true;
+            progressBar.setVisibility(View.GONE);
             posts = Arrays.asList(gson.fromJson(response, MeetingPlaces[].class));
 
             for(MeetingPlaces a:posts)
@@ -91,7 +95,7 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
                 case R.id.librarybutton:
                     startLibrary();
                     break;
-                case R.id.meetingbutton2:
+                case R.id.meetingbutton:
                     startMeeting();
                     break;
                 default:
