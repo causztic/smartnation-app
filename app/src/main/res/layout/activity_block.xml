@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -23,7 +23,7 @@
             android:padding="10dp"
             android:textStyle="bold"
             android:textAllCaps="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Quiet study rooms"
             android:background="#005662"
@@ -32,8 +32,10 @@
             <CheckBox
                 android:id="@+id/quietCheck"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
-        </LinearLayout>
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"/>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,7 +92,7 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -110,9 +112,11 @@
                 android:id="@+id/groupCheck"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
                 />
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <LinearLayout
@@ -185,7 +189,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -194,7 +198,7 @@
             android:padding="10dp"
             android:textStyle="bold"
             android:textAllCaps="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Recreation rooms"
             android:background="#4527a0"
@@ -203,8 +207,10 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/recCheck"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
            />
-    </LinearLayout>
+    </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

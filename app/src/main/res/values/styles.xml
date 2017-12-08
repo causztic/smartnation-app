@@ -20,14 +20,14 @@
     <style name="Darkness" parent="Theme.AppCompat.DayNight.DarkActionBar" >
         <item name="android:colorBackground">@color/background_material_dark</item>
         <item name="colorAccent">@color/White</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
-    <style name="Darkness1" parent="Theme.AppCompat.DayNight.DarkActionBar" >
+    </style>
+    <style name="Darkness.NoActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar" >
         <item name="android:colorBackground">@color/background_material_dark</item>
         <item name="colorAccent">@color/White</item>
-        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="CCTCV" parent="Darkness" />
