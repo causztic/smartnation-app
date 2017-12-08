@@ -9,11 +9,18 @@ import android.widget.Button;
 import android.widget.RadioButton;
 
 public class ChooseClassActivity extends AppCompatActivity {
+    SharedPreferences preference;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        preference = getSharedPreferences("prefs", MODE_PRIVATE);
+        editor = preference.edit();
+        editor.clear();
+        editor.commit();
+
         final RadioButton f01 = (RadioButton) findViewById(R.id.radioButton1);
         final RadioButton f02 = (RadioButton) findViewById(R.id.radioButton2);
         final RadioButton f03 = (RadioButton) findViewById(R.id.radioButton3);

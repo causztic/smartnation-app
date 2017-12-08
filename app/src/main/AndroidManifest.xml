@@ -37,7 +37,7 @@
             android:name=".LibraryMainActivity"
             android:label="@string/title_activity_main3_library"
             android:parentActivityName=".StudyMainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Darkness" />
         <activity
             android:name=".FoodActivity"
             android:parentActivityName=".FirstMenuMainActivity" />

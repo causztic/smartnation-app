@@ -5,8 +5,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.IBinder;
+import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,9 +18,15 @@ import com.lambdaworks.redis.RedisClient;
 import com.lambdaworks.redis.pubsub.RedisPubSubConnection;
 import com.lambdaworks.redis.pubsub.RedisPubSubListener;
 
+import java.util.Map;
+
 public class MyService extends Service {
     RedisPubSubConnection<String, String> connection;
     RedisClient client1;
+    SharedPreferences preference;
+    SharedPreferences.Editor editor;
+    String channel;
+    Map<String,?> keys;
     public MyService()
     {
 
@@ -25,9 +34,14 @@ public class MyService extends Service {
     public void onCreate()
     {
         super.onCreate();
+        preference=getSharedPreferences("prefs", MODE_PRIVATE);
+        editor=preference.edit();
         Log.w("TAG", "ScreenListenerService---OnCreate ");
-        client1=RedisClient.create();
-        connection = client1.connectPubSub();
+       /* StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        new MyService.RetrieveFeedTask().execute("redis://redistogo:eeb60232febb9e34c9d61b54948de9b1@grouper.redistogo.com:11914");*/
 
     }
     @Override
@@ -39,55 +53,15 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        String channel=intent.getStringExtra("type");
-        Log.i("service",channel);
+        preference=getSharedPreferences("prefs", MODE_PRIVATE);
+        editor=preference.edit();
 
-
-        connection.addListener(new RedisPubSubListener<String, String>() {
-            @Override
-            public void message(String channel, String message)
-            {
-                Log.i("message received",message);
-                if(message.equalsIgnoreCase("1"))
-                {
-                    showNotification(channel);
-                }
-
-            }
-
-            @Override
-            public void message(String pattern, String channel, String message)
-            {
-                Log.i("message received1",message);
-
-
-            }
-
-            @Override
-            public void subscribed(String channel, long count)
-            {
-                Log.i(channel,"subscribed");
-
-            }
-
-            @Override
-            public void psubscribed(String pattern, long count) {
-
-            }
-
-            @Override
-            public void unsubscribed(String channel, long count) {
-
-            }
-
-            @Override
-            public void punsubscribed(String pattern, long count) {
-
-            } });
-        connection.subscribe(channel);
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        new MyService.RetrieveFeedTask().execute("redis://redistogo:eeb60232febb9e34c9d61b54948de9b1@grouper.redistogo.com:11914");
+       // String channel=intent.getStringExtra("type");
         return START_NOT_STICKY;
-
 
     }
 
@@ -97,9 +71,9 @@ public class MyService extends Service {
         Resources r = getResources();
         Notification notification = new NotificationCompat.Builder(this)
                 .setTicker("Notification check")
-                .setSmallIcon(android.R.drawable.ic_menu_report_image)
-                .setContentTitle("Notification title")
-                .setContentText(m)
+                .setSmallIcon(R.drawable.notif_icon)
+                .setContentTitle("CCTCV Update")
+                .setContentText("Vacancy available!")
                 .setContentIntent(pi)
                 .setAutoCancel(true)
                 .build();
@@ -109,11 +83,84 @@ public class MyService extends Service {
         notificationManager.notify(0, notification);
 
         client1.shutdown();
-        stopSelf();
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    class RetrieveFeedTask extends AsyncTask<String, Void, RedisClient> {
+
+        private Exception exception;
+        protected RedisClient doInBackground(String... urls) {
+
+            RedisClient client=RedisClient.create(urls[0]);
+            return client;
+
+        }
+
+        protected void onPostExecute(RedisClient client)
+        {
+            connection=client.connectPubSub();
+            keys=preference.getAll();
+            for(final Map.Entry<String,? > entry : keys.entrySet())
+            {
+                Log.i("sharedpref",entry.getKey().toString());
+                if((entry!=null) && entry.getValue().toString().equalsIgnoreCase("true"))
+                {
+                    channel = entry.getKey();
+                    connection.addListener(new RedisPubSubListener<String, String>() {
+                        @Override
+                        public void message(String channel, String message)
+                        {
+                            Log.i("message received",message);
+                            if(message.equalsIgnoreCase("1"))
+                            {
+                                editor.putBoolean(channel,false);
+                                showNotification(channel);
+                            }
+
+                        }
+
+                        @Override
+                        public void message(String pattern, String channel, String message)
+                        {
+                            Log.i("message received1",message);
+
+
+                        }
+
+                        @Override
+                        public void subscribed(String channel, long count)
+                        {
+                            Log.i(channel,"subscribed");
+
+                        }
+
+                        @Override
+                        public void psubscribed(String pattern, long count) {
+
+                        }
+
+                        @Override
+                        public void unsubscribed(String channel, long count) {
+
+                        }
+
+                        @Override
+                        public void punsubscribed(String pattern, long count) {
+
+                        } });
+
+
+
+                    connection.subscribe(channel);
+                }
+            }
+
+
+        }
     }
 }

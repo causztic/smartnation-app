@@ -34,95 +34,76 @@ public class BlockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_block);
-        rec3=(TextView)findViewById(R.id.Recreation_lvl3);
-        rec6=(TextView)findViewById(R.id.Recreation_lvl6);
-        quiet=(TextView)findViewById(R.id.Quiet_Study_lvl2);
-        group4=(TextView)findViewById(R.id.Group_Study_lvl4);
-        group7=(TextView)findViewById(R.id.Group_Study_lvl7);
-        recc=(CheckBox)findViewById(R.id.recCheck);
-        quietc=(CheckBox)findViewById(R.id.quietCheck);
-        groupc=(CheckBox)findViewById(R.id.groupCheck);
-        preference=getSharedPreferences("prefs", MODE_PRIVATE);
-        editor=preference.edit();
+        rec3 = (TextView) findViewById(R.id.Recreation_lvl3);
+        rec6 = (TextView) findViewById(R.id.Recreation_lvl6);
+        quiet = (TextView) findViewById(R.id.Quiet_Study_lvl2);
+        group4 = (TextView) findViewById(R.id.Group_Study_lvl4);
+        group7 = (TextView) findViewById(R.id.Group_Study_lvl7);
+        recc = (CheckBox) findViewById(R.id.recCheck);
+        quietc = (CheckBox) findViewById(R.id.quietCheck);
+        groupc = (CheckBox) findViewById(R.id.groupCheck);
+        preference = getSharedPreferences("prefs", MODE_PRIVATE);
+        editor = preference.edit();
 
         Intent intent = getIntent();
-        int m = intent.getIntExtra(MeetingRoomActivity.KEY,0);
-        final String message=m+"";
+        int m = intent.getIntExtra(MeetingRoomActivity.KEY, 0);
+        final String message = m + "";
 
-        boolean isRecChecked=preference.getBoolean(message+"rec",false);
-        Log.i("RecChck",isRecChecked+"");
-        boolean isGroupChecked=preference.getBoolean(message+"group",false);
-        boolean isQuietChecked=preference.getBoolean(message+"quiet",false);
-        Log.i("Quiet CHeck",isQuietChecked+"");
+        boolean isRecChecked = preference.getBoolean(message + ":rec", false);
+        Log.i("RecChck", isRecChecked + "");
+        boolean isGroupChecked = preference.getBoolean(message + ":group", false);
+        boolean isQuietChecked = preference.getBoolean(message + ":quiet", false);
+        Log.i("Quiet Check", isQuietChecked + "");
 
         recc.setChecked(isRecChecked);
         quietc.setChecked(isQuietChecked);
         groupc.setChecked(isGroupChecked);
+        if (!message.equalsIgnoreCase("0")) {
 
-        quietc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-            {
-                if(!b)
-                {
-                    Log.i("Setting to unchecked",b+"");
-                    compoundButton.setChecked(false);
-                    editor.putBoolean(message+"quiet",false);
-                    editor.commit();
-                    Intent i= new Intent(getApplicationContext(), MyService.class);
-                    stopService(i);
-
-                   /* PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(getApplicationContext(), BlockActivity.class), 0);
-                    Resources r = getResources();
-                    Notification notification = new NotificationCompat.Builder(getApplicationContext())
-                            .setTicker("Notification check")
-                            .setSmallIcon(android.R.drawable.ic_menu_report_image)
-                            .setContentTitle("Notification title")
-                            .setContentText(message+"quiet")
-                            .setContentIntent(pi)
-                            .setAutoCancel(true)
-                            .build();
-
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                    notificationManager.notify(0, notification);*/
+            quietc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (!b) {
+                        Log.i("Setting to unchecked", b + "");
+                        compoundButton.setChecked(false);
+                        editor.putBoolean(message + ":quiet", false);
+                        editor.commit();
+                        Intent i = new Intent(getApplicationContext(), MyService.class);
+                        startService(i);
 
 
-                }
-                else
-                {
-                    Log.i("setting to checked",b+"");
-                    compoundButton.setChecked(true);
-                    editor.putBoolean(message+"quiet",true);
-                    editor.commit();
-                    //subscribe to pub sub
-                    Intent i= new Intent(getApplicationContext(), MyService.class);
-                    i.putExtra("type",message+":quiet");
-                    Log.i("messagename",message+":quiet");
-                    startService(i);
+                    } else {
+                        Log.i("setting to checked", b + "");
+                        compoundButton.setChecked(true);
+                        editor.putBoolean(message + ":quiet", true);
+                        editor.commit();
+                        //subscribe to pub sub
+                        Intent i = new Intent(getApplicationContext(), MyService.class);
+                        // i.putExtra("type",message+":quiet");
+                        Log.i("messagename", message + ":quiet");
+                        startService(i);
+
+                    }
+
 
                 }
+
+            });
+            RedisConnect rc;
+
+            switch (m) {
+                case 55:
+                    rc = new RedisConnect(quiet, "55:quiet");
+                    break;
+                case 57:
+                    break;
+                case 59:
+                    break;
+                default:
+                    break;
 
 
             }
-
-        });
-        RedisConnect rc;
-
-        switch(m)
-        {
-            case 55:
-                rc=new RedisConnect(quiet,"55:quiet");
-                break;
-            case 57:
-                break;
-            case 59:
-                break;
-            default:
-                break;
-
-
-
-
         }
     }
 }
