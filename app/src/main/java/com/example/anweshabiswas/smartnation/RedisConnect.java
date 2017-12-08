@@ -60,7 +60,7 @@ public class RedisConnect {
              value=connection1.get("stat:"+key+":latest");
             else
                 value=connection1.get(key);
-            occ.setText(key+" "+value);
+            occ.setText(key+":"+value+" people ");
 //            Log.i("Anweshamsg",value);
 
             client.shutdown();
