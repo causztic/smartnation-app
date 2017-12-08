@@ -1,5 +1,7 @@
 package com.example.anweshabiswas.smartnation;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -9,7 +11,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -42,6 +46,7 @@ public class IndividualFoodActivity extends AppCompatActivity
     BarDataSet Bardataset ;
     BarData BARDATA ;
 
+
     ImageView header;
     TextView occ;
     TextView graphTitle;
@@ -59,8 +64,13 @@ public class IndividualFoodActivity extends AppCompatActivity
     private final String queryFrom="2016-01-01%2008:03:10";
     private final String queryto="2019-01-01%2020:03:10";
     private final String queryoart="hour";
+    private ProgressDialog prog;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        prog=new ProgressDialog(IndividualFoodActivity.this);
+        prog.setMessage("Loading information");
+        prog.show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
 
@@ -82,7 +92,7 @@ public class IndividualFoodActivity extends AppCompatActivity
         double occupancy=Math.random();
         Log.i("anwesha name=",name);
 
-        new IndividualFoodActivity.DownloadHeaderTask(header).execute(headerUrl);
+
 
         //occ.setText(name+":"+String.valueOf(occupancy));
         graphTitle.setText("Peak hours for "+name);
@@ -102,7 +112,8 @@ public class IndividualFoodActivity extends AppCompatActivity
         requestQueue = Volley.newRequestQueue(this);
         gson = gsonBuilder.create();
         fetchPosts();
-}
+        new IndividualFoodActivity.DownloadHeaderTask(header,getApplicationContext()).execute(headerUrl);
+    }
     private void fetchPosts()
     {   Log.i("PostActivityLib","fetching");
         StringRequest request = new StringRequest(Request.Method.GET, ENDPOINT, onPostsLoaded, onPostsError);
@@ -147,7 +158,7 @@ public class IndividualFoodActivity extends AppCompatActivity
             chart.setData(BARDATA);
             Log.i("Chart","set");
             chart.invalidate();
-       }
+        }
     };
 
     private final Response.ErrorListener onPostsError = new Response.ErrorListener() {
@@ -160,8 +171,11 @@ public class IndividualFoodActivity extends AppCompatActivity
     class DownloadHeaderTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
-        public DownloadHeaderTask(ImageView bmImage) {
+        Context context;
+
+        public DownloadHeaderTask(ImageView bmImage, Context ctxt) {
             this.bmImage = bmImage;
+
         }
 
         protected Bitmap doInBackground(String... urls) {
@@ -178,6 +192,10 @@ public class IndividualFoodActivity extends AppCompatActivity
         }
 
         protected void onPostExecute(Bitmap result) {
+            if(prog != null && prog.isShowing()){
+                prog.dismiss ( ) ;
+            }
+
             bmImage.setImageBitmap(result);
             Log.i("Image","set");
         }

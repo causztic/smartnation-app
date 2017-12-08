@@ -61,7 +61,7 @@ public class RedisConnect {
             else
                 value=connection1.get(key);
             occ.setText(key+" "+value);
-            Log.i("Anweshamsg",value);
+//            Log.i("Anweshamsg",value);
 
             client.shutdown();
 
