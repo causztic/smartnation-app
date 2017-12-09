@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,35 +10,41 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-
-
-        <TextView
-            android:id="@+id/QuietStudy"
-            android:padding="10dp"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quiet study rooms"
-            android:background="#005662"
-            android:textColor="@color/White"/>
+            <TextView
+                android:id="@+id/QuietStudy"
+                android:layout_alignParentStart="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#005662"
+                android:padding="10dp"
+                android:text="Quiet study rooms"
+                android:textAllCaps="true"
+                android:textColor="@color/White"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true" />
 
             <CheckBox
                 android:id="@+id/quietCheck"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"/>
+                android:clickable="true"
+                android:visibility="visible"
+                android:buttonTint="@color/White" />
+
+
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:background="#00838f"
@@ -48,7 +53,6 @@
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/Quiet_Study_lvl2"
                 android:src="@drawable/quietstudyrm" />
 
             <HorizontalScrollView
@@ -63,7 +67,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="L2"
@@ -94,34 +97,36 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <TextView
-            android:id="@+id/GroupStudy"
-            android:padding="10dp"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Group study rooms"
-            android:background="#003c8f"
-            android:textColor="@color/White"
-            />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/GroupStudy"
+                android:layout_alignParentStart="true"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Group study rooms"
+                android:background="#003c8f"
+                android:textColor="@color/White"
+                android:layout_alignParentLeft="true" />
 
             <CheckBox
                 android:id="@+id/groupCheck"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                />
+                android:clickable="true"
+                android:buttonTint="@color/White" />
 
         </RelativeLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:background="#1565c0"
@@ -136,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                 >
+                >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -189,32 +194,39 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/Recreation"
-            android:padding="10dp"
-            android:textStyle="bold"
-            android:textAllCaps="true"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Recreation rooms"
-            android:background="#4527a0"
-            android:textColor="@color/White"/>
-        <CheckBox
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/recCheck"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-           />
-    </RelativeLayout>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Recreation"
+                android:layout_alignParentStart="true"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recreation rooms"
+                android:background="#4527a0"
+                android:textColor="@color/White"
+                android:layout_alignParentLeft="true" />
+
+            <CheckBox
+                android:id="@+id/recCheck"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:buttonTint="@color/White" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:background="#7953d2"
@@ -275,4 +287,3 @@
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
-

@@ -7,14 +7,12 @@
     android:layout_height="wrap_content"
     card_view:cardElevation="5dp"
     card_view:cardCornerRadius="5dp"
-    card_view:cardMaxElevation="5dp"
-    >
+    card_view:cardMaxElevation="5dp">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="250dp"
         android:background="#ECEFF1">
-
 
         <ImageButton
             android:id="@+id/buttonView"
