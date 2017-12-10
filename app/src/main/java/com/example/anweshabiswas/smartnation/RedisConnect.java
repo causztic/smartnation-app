@@ -4,6 +4,7 @@ package com.example.anweshabiswas.smartnation;
  * Created by Anwesha Biswas on 6/12/2017.
  */
 
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
@@ -19,8 +20,6 @@ import java.net.URL;
 
 public class RedisConnect {
 
-
-    RedisPubSubConnection<String, String> connection;
     RedisStringsConnection<String, String> connection1;
     String key;
     TextView occ;
@@ -33,8 +32,8 @@ public class RedisConnect {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
         new RetrieveFeedTask().execute("redis://redistogo:eeb60232febb9e34c9d61b54948de9b1@grouper.redistogo.com:11914");
+
 
     }
 
@@ -53,14 +52,16 @@ public class RedisConnect {
         protected void onPostExecute(RedisClient client) {
 
             connection1=client.connect();
-            Log.i("AnweshaRedis","connection made");
-            Log.i("key value",key);
             String value;
-            if(!key.equalsIgnoreCase("55:quiet"))
-             value=connection1.get("stat:"+key+":latest");
-            else
-                value=connection1.get(key);
-            occ.setText(key+" "+value);
+            if(!key.equalsIgnoreCase("55:quiet")) {
+                value = connection1.get("stat:" + key + ":latest");
+                occ.setText(key + ": " + value + " people");
+            }
+            else {
+                value = connection1.get(key);
+                occ.setText(value);
+            }
+
 //            Log.i("Anweshamsg",value);
 
             client.shutdown();

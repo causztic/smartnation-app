@@ -31,6 +31,7 @@
 
             <CheckBox
                 android:id="@+id/quietCheck"
+                android:layout_centerInParent="true"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
@@ -111,6 +112,7 @@
             <CheckBox
                 android:id="@+id/groupCheck"
                 android:layout_width="50dp"
+                android:layout_centerVertical="true"
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
@@ -192,11 +194,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+       >
         <TextView
             android:id="@+id/Recreation"
             android:padding="10dp"
+            android:layout_alignParentStart="true"
             android:textStyle="bold"
+            android:layout_alignParentLeft="true"
             android:textAllCaps="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -204,9 +208,11 @@
             android:background="#4527a0"
             android:textColor="@color/White"/>
         <CheckBox
+            android:layout_toStartOf="@+id/Recreation"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/recCheck"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
            />

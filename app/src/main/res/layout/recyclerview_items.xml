@@ -6,7 +6,6 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     card_view:cardElevation="5dp"
-    card_view:cardCornerRadius="5dp"
     card_view:cardMaxElevation="5dp"
     >
 
@@ -21,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:scaleType="fitXY"
+            android:scaleType="centerInside"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />

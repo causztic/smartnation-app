@@ -6,7 +6,7 @@
     <color name="White">#ffffff</color>
     <color name="Black">#000000</color>
     <color name="Grey">#696969</color>
-    <color name="primary_material_dark">#11121a</color>
+    <color name="primary_material_dark">#000000</color>
     <color name="accent_material_dark">#b2c9c7</color>
     <color name="background_material_dark">#ffffff</color>
 </resources>
