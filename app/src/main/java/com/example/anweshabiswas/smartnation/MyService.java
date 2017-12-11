@@ -153,6 +153,8 @@ public class MyService extends Service {
 
 
                 }
+                else
+                    connection.unsubscribe(channel);
             }
             return client;
         }
