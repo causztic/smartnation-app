@@ -50,10 +50,8 @@ public class BlockActivity extends AppCompatActivity {
         final String message = m + "";
 
         boolean isRecChecked = preference.getBoolean(message + ":rec", false);
-        Log.i("RecChck", isRecChecked + "");
         boolean isGroupChecked = preference.getBoolean(message + ":group", false);
         boolean isQuietChecked = preference.getBoolean(message + ":quiet", false);
-        Log.i("Quiet Check", isQuietChecked + "");
 
         recc.setChecked(isRecChecked);
         quietc.setChecked(isQuietChecked);
@@ -64,7 +62,6 @@ public class BlockActivity extends AppCompatActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if (!b) {
-                        Log.i("Setting to unchecked", b + "");
                         compoundButton.setChecked(false);
                         editor.putBoolean(message + ":quiet", false);
                         editor.commit();
@@ -73,14 +70,12 @@ public class BlockActivity extends AppCompatActivity {
 
 
                     } else {
-                        Log.i("setting to checked", b + "");
                         compoundButton.setChecked(true);
                         editor.putBoolean(message + ":quiet", true);
                         editor.commit();
                         //subscribe to pub sub
                         Intent i = new Intent(getApplicationContext(), MyService.class);
                         // i.putExtra("type",message+":quiet");
-                        Log.i("messagename", message + ":quiet");
                         startService(i);
 
                     }
@@ -96,8 +91,10 @@ public class BlockActivity extends AppCompatActivity {
                     rc = new RedisConnect(quiet, "55:quiet");
                     break;
                 case 57:
+                    rc = new RedisConnect(quiet, "57:quiet");
                     break;
                 case 59:
+                    rc = new RedisConnect(quiet, "59:quiet");
                     break;
                 default:
                     break;

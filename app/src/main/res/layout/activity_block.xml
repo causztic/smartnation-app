@@ -30,10 +30,16 @@
 
             <CheckBox
                 android:id="@+id/quietCheck"
+<<<<<<< HEAD
                 android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+=======
+                android:layout_centerInParent="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+>>>>>>> cleanup
                 android:layout_alignParentRight="true"
                 android:clickable="true"
                 android:visibility="visible"
@@ -114,10 +120,16 @@
 
             <CheckBox
                 android:id="@+id/groupCheck"
+<<<<<<< HEAD
                 android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+=======
+                android:layout_width="50dp"
+                android:layout_centerVertical="true"
+                android:layout_height="50dp"
+>>>>>>> cleanup
                 android:layout_alignParentRight="true"
                 android:clickable="true"
                 android:buttonTint="@color/White" />
@@ -194,6 +206,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
+<<<<<<< HEAD
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -223,6 +236,34 @@
                 android:buttonTint="@color/White" />
 
         </RelativeLayout>
+=======
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+        <TextView
+            android:id="@+id/Recreation"
+            android:padding="10dp"
+            android:layout_alignParentStart="true"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"
+            android:textAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recreation rooms"
+            android:background="#4527a0"
+            android:textColor="@color/White"/>
+        <CheckBox
+            android:layout_toStartOf="@+id/Recreation"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/recCheck"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+           />
+    </RelativeLayout>
+>>>>>>> cleanup
 
         <LinearLayout
             android:layout_width="match_parent"

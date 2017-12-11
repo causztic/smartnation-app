@@ -55,15 +55,7 @@ public class IndividualFoodActivity extends AppCompatActivity
     String statsurl;
     private RequestQueue requestQueue;
     private Gson gson;
-    private final String scheme="https";
-    private final String authority="www.floating-forest-82850.herokuapp.com";
     private final String ENDPOINT="http://floating-forest-82850.herokuapp.com/stats/1?from=2016-01-01%2008:03:10&to=2019-01-01%2020:03:10&part=hour";
-    private final String foodpath="food";
-    private final String areapath="area";
-    private final String statspath="stats";
-    private final String queryFrom="2016-01-01%2008:03:10";
-    private final String queryto="2019-01-01%2020:03:10";
-    private final String queryoart="hour";
     private ProgressDialog prog;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -76,9 +68,6 @@ public class IndividualFoodActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         int id = intent.getIntExtra(RecyclerViewAdapter.KEY,0);
-
-        Log.i("anwesha",String.valueOf(id));
-
         FoodPlaces location=RecyclerViewAdapter.MainFoodInfoList.get(id);
 
         String name= location.getName();
@@ -89,24 +78,15 @@ public class IndividualFoodActivity extends AppCompatActivity
         occ=(TextView)findViewById(R.id.location_occupancy);
         graphTitle=(TextView)findViewById(R.id.graphtitle);
         header =(ImageView)findViewById(R.id.header_image);
-        double occupancy=Math.random();
-        Log.i("anwesha name=",name);
 
-
-
-        //occ.setText(name+":"+String.valueOf(occupancy));
         graphTitle.setText("Peak hours for "+name);
 
         RedisConnect rc=new RedisConnect(occ,name);
 
         chart = (BarChart) findViewById(R.id.barchart);
 
-        Uri.Builder builder = new Uri.Builder();
-        builder.scheme(scheme).authority(authority).appendPath(areapath).appendPath(foodpath);
-        Uri.Builder builder1 = new Uri.Builder();
-        builder1.scheme(scheme).authority(authority).appendPath(statspath).appendPath(String.valueOf(1)).appendQueryParameter("from",queryFrom).appendQueryParameter("to",queryto).appendQueryParameter("part",queryoart);
-        statsurl=builder1.build().toString();
-        Log.i("URL",statsurl);
+        /*statsurl="http://floating-forest-82850.herokuapp.com/stats/"+String.valueof(id1)+"?from=2016-01-01%2008:03:10&to=2019-01-01%2020:03:10&part=hour";
+        * to be used in place of endpoint once other stats classes are running */
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         requestQueue = Volley.newRequestQueue(this);
@@ -115,7 +95,7 @@ public class IndividualFoodActivity extends AppCompatActivity
         new IndividualFoodActivity.DownloadHeaderTask(header,getApplicationContext()).execute(headerUrl);
     }
     private void fetchPosts()
-    {   Log.i("PostActivityLib","fetching");
+    {
         StringRequest request = new StringRequest(Request.Method.GET, ENDPOINT, onPostsLoaded, onPostsError);
         requestQueue.add(request);
     }
@@ -124,8 +104,6 @@ public class IndividualFoodActivity extends AppCompatActivity
         @Override
         public void onResponse(String response) {
             stats = Arrays.asList(gson.fromJson(response, Statistics[].class));
-
-            Log.i("PostActivityGraph"+5f, stats.size() + " posts loaded.");
 
             BARENTRY = new ArrayList<>();
             BarEntryLabels = new ArrayList<String>();
@@ -146,7 +124,6 @@ public class IndividualFoodActivity extends AppCompatActivity
                     BarEntryLabels.add(label+"0pm");
 
                 count++;
-                Log.i("Chart loop",val1+" "+label);
             }
 
             Bardataset = new BarDataSet(BARENTRY, "Average number of people");
@@ -156,7 +133,6 @@ public class IndividualFoodActivity extends AppCompatActivity
             Bardataset.setColors(ColorTemplate.PASTEL_COLORS);
 
             chart.setData(BARDATA);
-            Log.i("Chart","set");
             chart.invalidate();
         }
     };
@@ -197,7 +173,6 @@ public class IndividualFoodActivity extends AppCompatActivity
             }
 
             bmImage.setImageBitmap(result);
-            Log.i("Image","set");
         }
     }
 
