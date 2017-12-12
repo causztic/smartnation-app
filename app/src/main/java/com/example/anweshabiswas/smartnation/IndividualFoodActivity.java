@@ -85,8 +85,8 @@ public class IndividualFoodActivity extends AppCompatActivity
 
         chart = (BarChart) findViewById(R.id.barchart);
 
-        /*statsurl="http://floating-forest-82850.herokuapp.com/stats/"+String.valueof(id1)+"?from=2016-01-01%2008:03:10&to=2019-01-01%2020:03:10&part=hour";
-        * to be used in place of endpoint once other stats classes are running */
+        statsurl="http://floating-forest-82850.herokuapp.com/stats/"+String.valueOf(id1)+"?from=2016-01-01%2008:03:10&to=2019-01-01%2020:03:10&part=hour";
+
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         requestQueue = Volley.newRequestQueue(this);
@@ -96,7 +96,7 @@ public class IndividualFoodActivity extends AppCompatActivity
     }
     private void fetchPosts()
     {
-        StringRequest request = new StringRequest(Request.Method.GET, ENDPOINT, onPostsLoaded, onPostsError);
+        StringRequest request = new StringRequest(Request.Method.GET, statsurl, onPostsLoaded, onPostsError);
         requestQueue.add(request);
     }
 

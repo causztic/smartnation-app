@@ -30,16 +30,15 @@
 
             <CheckBox
                 android:id="@+id/quietCheck"
-<<<<<<< HEAD
+
                 android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-=======
+
                 android:layout_centerInParent="true"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
->>>>>>> cleanup
                 android:layout_alignParentRight="true"
                 android:clickable="true"
                 android:visibility="visible"
@@ -120,16 +119,13 @@
 
             <CheckBox
                 android:id="@+id/groupCheck"
-<<<<<<< HEAD
                 android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-=======
                 android:layout_width="50dp"
                 android:layout_centerVertical="true"
                 android:layout_height="50dp"
->>>>>>> cleanup
                 android:layout_alignParentRight="true"
                 android:clickable="true"
                 android:buttonTint="@color/White" />
@@ -206,7 +202,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-<<<<<<< HEAD
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -236,7 +231,6 @@
                 android:buttonTint="@color/White" />
 
         </RelativeLayout>
-=======
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -263,7 +257,6 @@
             android:layout_alignParentTop="true"
            />
     </RelativeLayout>
->>>>>>> cleanup
 
         <LinearLayout
             android:layout_width="match_parent"

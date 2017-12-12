@@ -28,6 +28,7 @@ public class MyService extends Service {
     String channel;
     Map<String,?> keys;
     RetrieveFeedTask obj=new MyService.RetrieveFeedTask();
+    boolean flag;
     public MyService()
     {
 
@@ -35,6 +36,7 @@ public class MyService extends Service {
     public void onCreate()
     {
         super.onCreate();
+        flag=false;
         preference=getSharedPreferences("prefs", MODE_PRIVATE);
         editor=preference.edit();
         Log.w("TAG", "ScreenListenerService---OnCreate ");
@@ -56,6 +58,7 @@ public class MyService extends Service {
     {
         preference=getSharedPreferences("prefs", MODE_PRIVATE);
         editor=preference.edit();
+        flag=false;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -82,6 +85,7 @@ public class MyService extends Service {
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
         connection.unsubscribe(channel);
+        flag=false;
 
         client1.shutdown();
         stopSelf();
@@ -106,6 +110,7 @@ public class MyService extends Service {
                 Log.i("sharedpref", entry.getKey().toString());
                 if ((entry != null) && entry.getValue().toString().equalsIgnoreCase("true")) {
                     channel = entry.getKey();
+                    flag=true;
                     connection.addListener(new RedisPubSubListener<String, String>() {
                         @Override
                         public void message(String channel, String message) {
@@ -153,8 +158,7 @@ public class MyService extends Service {
 
 
                 }
-                else
-                    connection.unsubscribe(channel);
+
             }
             return client;
         }
@@ -163,7 +167,11 @@ public class MyService extends Service {
         protected void onPostExecute(final RedisClient client)
         {
 
-                    connection.subscribe(channel);
+
+                    if(flag==true)
+                     connection.subscribe(channel);
+                    else
+                        connection.unsubscribe(channel);
 
                 }
 
