@@ -58,7 +58,6 @@ public class IndividualFoodActivity extends AppCompatActivity
     String statsurl;
     private RequestQueue requestQueue;
     private Gson gson;
-    private final String ENDPOINT="http://floating-forest-82850.herokuapp.com/stats/1?from=2016-01-01%2008:03:10&to=2019-01-01%2020:03:10&part=hour";
     private ProgressDialog prog;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -127,11 +126,11 @@ public class IndividualFoodActivity extends AppCompatActivity
 
 
                 BARENTRY.add(new BarEntry(val1, count));
-                float x=Float.parseFloat(label);
+                double x=s.getInterval()+8.0;
                 if(x<12.0)
-                    BarEntryLabels.add(label+"0am");
+                    BarEntryLabels.add(x+"0am");
                 else
-                    BarEntryLabels.add(label+"0pm");
+                    BarEntryLabels.add(x+"0pm");
 
                 count++;
             }

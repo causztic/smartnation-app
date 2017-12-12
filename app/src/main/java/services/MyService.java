@@ -23,13 +23,12 @@ import java.util.Map;
 
 public class MyService extends Service {
     RedisPubSubConnection<String, String> connection;
-    RedisClient client1;
     SharedPreferences preference;
+    SharedPreferences preference1;
     SharedPreferences.Editor editor;
+    SharedPreferences.Editor editor1;
     String channel;
     Map<String,?> keys;
-    RetrieveFeedTask obj=new MyService.RetrieveFeedTask();
-    boolean flag;
     public MyService()
     {
 
@@ -37,7 +36,6 @@ public class MyService extends Service {
     public void onCreate()
     {
         super.onCreate();
-        flag=false;
         preference=getSharedPreferences("prefs", MODE_PRIVATE);
         editor=preference.edit();
         Log.w("TAG", "ScreenListenerService---OnCreate ");
@@ -58,13 +56,43 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId)
     {
         preference=getSharedPreferences("prefs", MODE_PRIVATE);
+        preference1=getSharedPreferences("prefFirst",MODE_PRIVATE);
         editor=preference.edit();
-        flag=false;
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        editor1=preference1.edit();
+        keys = preference.getAll();
+        for (final Map.Entry<String, ?> entry : keys.entrySet())
+        {
+           // Log.i("sharedpref", entry.getKey().toString());
+            if ((entry != null) && entry.getValue().toString().equalsIgnoreCase("true"))
+            {
 
-       new MyService.RetrieveFeedTask().execute(getApplicationContext().getString(R.string.redis));
+                channel = entry.getKey().toString();
+             //   Log.i("checkprefd",preference1.getBoolean(channel+"first",true)+"");
+                if(preference1.getBoolean(channel+"first",true))
+                {
+
+                    connection.subscribe(channel);
+                    editor1.putBoolean(channel+"first",false);
+                    editor1.commit();
+                }
+
+          }
+          else
+            {
+
+                channel = entry.getKey().toString();
+                if(!preference1.getBoolean(channel+"first",true)) {
+                    connection.unsubscribe(channel);
+                    editor1.putBoolean(channel + "first", true);
+                    editor1.commit();
+                }
+            }
+
+
+
+        }
+
+
         return START_NOT_STICKY;
 
     }
@@ -77,7 +105,7 @@ public class MyService extends Service {
                 .setTicker("Notification check")
                 .setSmallIcon(R.drawable.notif_icon)
                 .setContentTitle("CCTCV Update")
-                .setContentText("Vacancy available in "+channel+" study")
+                .setContentText("Vacancy available in "+m+" study")
                 .setContentIntent(pi)
                 .setAutoCancel(true)
                 .build();
@@ -85,11 +113,9 @@ public class MyService extends Service {
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
-        connection.unsubscribe(channel);
-        flag=false;
+        connection.unsubscribe(m);
 
-        client1.shutdown();
-        stopSelf();
+
 
     }
 
@@ -106,61 +132,54 @@ public class MyService extends Service {
 
             final RedisClient client = RedisClient.create(urls[0]);
             connection = client.connectPubSub();
-            keys = preference.getAll();
-            for (final Map.Entry<String, ?> entry : keys.entrySet()) {
-                Log.i("sharedpref", entry.getKey().toString());
-                if ((entry != null) && entry.getValue().toString().equalsIgnoreCase("true")) {
-                    channel = entry.getKey();
-                    flag=true;
-                    connection.addListener(new RedisPubSubListener<String, String>() {
-                        @Override
-                        public void message(String channel, String message) {
-                            Log.i("message received", message);
-                            if (message.equalsIgnoreCase("1")) {
-                                editor.putBoolean(channel, false);
-                                editor.commit();
-                                Log.i("channelfalse", channel + false + "");
-                                showNotification(channel);
-
-                            }
-
-                        }
-
-                        @Override
-                        public void message(String pattern, String channel, String message) {
-
-                        }
-
-                        @Override
-                        public void subscribed(String channel, long count) {
-                            Log.i(channel, "subscribed");
-
-                        }
-
-                        @Override
-                        public void psubscribed(String pattern, long count) {
-
-                        }
-
-                        @Override
-                        public void unsubscribed(String channel, long count)
-                        {
-                            Log.i("unsubbed",channel);
-
-                        }
-
-                        @Override
-                        public void punsubscribed(String pattern, long count)
-                        {
-                            Log.i("punsubbed",channel);
-                        }
-                    });
+            connection.addListener(new RedisPubSubListener<String, String>() {
+                @Override
+                public void message(String channel, String message) {
+                    Log.i("message received", message);
+                    if (message.equalsIgnoreCase("1")) {
+                        editor.putBoolean(channel, false);
+                        editor1.putBoolean(channel+"first",true);
+                        editor.commit();
+                        editor1.commit();
 
 
+                        showNotification(channel);
+
+                    }
 
                 }
 
-            }
+                @Override
+                public void message(String pattern, String channel, String message) {
+
+                }
+
+                @Override
+                public void subscribed(String channel, long count) {
+                    Log.i(channel, "subscribed");
+
+                }
+
+                @Override
+                public void psubscribed(String pattern, long count) {
+
+                }
+
+                @Override
+                public void unsubscribed(String channel, long count)
+                {
+                    Log.i("unsubbed",channel);
+
+                }
+
+                @Override
+                public void punsubscribed(String pattern, long count)
+                {
+                    Log.i("punsubbed",channel);
+                }
+            });
+
+
             return client;
         }
 
@@ -169,15 +188,10 @@ public class MyService extends Service {
         {
 
 
-                    if(flag==true)
-                     connection.subscribe(channel);
-                    else
-                        connection.unsubscribe(channel);
-
-                }
-
-
 
         }
-    }
 
+
+
+    }
+}
