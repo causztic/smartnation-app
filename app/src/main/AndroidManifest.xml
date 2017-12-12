@@ -16,38 +16,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Darkness">
-        <activity android:name=".ChooseClassActivity">
+        <activity android:name="menus.ChooseClassActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FirstMenuMainActivity">
+        <activity android:name="menus.FirstMenuMainActivity">
         </activity>
         <activity
-            android:name=".StudyMainActivity"
-            android:parentActivityName=".FirstMenuMainActivity" />
+            android:name="study.StudyMainActivity"
+            android:parentActivityName="menus.FirstMenuMainActivity" />
         <activity
-            android:name=".LibraryMainActivity"
+            android:name="study.LibraryMainActivity"
             android:label="@string/title_activity_main3_library"
-            android:parentActivityName=".StudyMainActivity"
+            android:parentActivityName="study.StudyMainActivity"
             android:theme="@style/Darkness.NoActionBar" />
         <activity
-            android:name=".FoodActivity"
-            android:parentActivityName=".FirstMenuMainActivity" />
+            android:name="food.FoodActivity"
+            android:parentActivityName="menus.FirstMenuMainActivity" />
         <activity
-            android:name=".MeetingRoomActivity"
-            android:parentActivityName=".StudyMainActivity" />
+            android:name="study.MeetingRoomActivity"
+            android:parentActivityName="study.StudyMainActivity" />
         <activity
-            android:name=".BlockActivity"
-            android:parentActivityName=".StudyMainActivity" />
+            android:name="study.BlockActivity"
+            android:parentActivityName="study.StudyMainActivity" />
         <activity
-            android:name=".IndividualFoodActivity"
-            android:parentActivityName=".FoodActivity"></activity>
+            android:name="food.IndividualFoodActivity"
+            android:parentActivityName="food.FoodActivity"></activity>
 
         <service
-            android:name=".MyService"
+            android:name="services.MyService"
             android:enabled="true"
             android:exported="true">
 

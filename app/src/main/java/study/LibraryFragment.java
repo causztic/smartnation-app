@@ -1,4 +1,4 @@
-package com.example.anweshabiswas.smartnation;
+package study;
 
 /**
  * Created by Anwesha Biswas on 30/10/2017.
@@ -21,11 +21,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.anweshabiswas.smartnation.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+
+import json_objects.MeetingPlaces;
 
 
 public class LibraryFragment extends Fragment

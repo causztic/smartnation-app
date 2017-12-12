@@ -15,7 +15,7 @@
             android:adjustViewBounds="true"
             android:padding="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/canteenheader" />
+            />
 
         <TextView
             android:id="@+id/location_occupancy"
@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:background="#707070"
             android:textColor="@color/White"
-            android:text="Canteen:MILDLY BUSY"
 
             android:scaleType="fitCenter"
             android:textAlignment="center"
@@ -45,7 +44,6 @@
 
             android:layout_marginBottom="10dp"
 
-            android:text="Peak hours for Canteen"
 
             android:textAlignment="center"
 
