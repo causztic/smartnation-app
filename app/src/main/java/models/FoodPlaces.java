@@ -1,9 +1,8 @@
-package json_objects;
+package models;
 
 /**
  * Created by Anwesha Biswas on 2/12/2017.
  */
-import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 

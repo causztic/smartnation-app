@@ -15,9 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import json_objects.MeetingPlaces;
-import study.LibraryMainActivity;
-import study.MeetingRoomActivity;
+import models.MeetingPlaces;
 
 import com.example.anweshabiswas.smartnation.R;
 import com.google.gson.Gson;

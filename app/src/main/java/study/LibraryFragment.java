@@ -28,7 +28,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import json_objects.MeetingPlaces;
+import models.MeetingPlaces;
 
 
 public class LibraryFragment extends Fragment

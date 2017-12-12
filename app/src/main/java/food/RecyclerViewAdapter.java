@@ -30,7 +30,7 @@ import com.example.anweshabiswas.smartnation.R;
 
 import java.util.List;
 
-import json_objects.FoodPlaces;
+import models.FoodPlaces;
 
 
 /**

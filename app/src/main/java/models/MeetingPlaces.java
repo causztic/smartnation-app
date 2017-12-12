@@ -1,4 +1,4 @@
-package json_objects;
+package models;
 
 import java.io.Serializable;
 

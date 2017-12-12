@@ -28,16 +28,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.InputStream;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import redis.RedisConnect;
-import json_objects.FoodPlaces;
-import json_objects.Statistics;
+import models.FoodPlaces;
+import models.Statistics;
 import java.util.Calendar;
 
 

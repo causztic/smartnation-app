@@ -15,7 +15,7 @@ import com.example.anweshabiswas.smartnation.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import json_objects.MeetingPlaces;
+import models.MeetingPlaces;
 
 public class LibraryMainActivity extends AppCompatActivity {
 

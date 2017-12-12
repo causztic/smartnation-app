@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import json_objects.FoodPlaces;
+import models.FoodPlaces;
 
 public class FoodActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 

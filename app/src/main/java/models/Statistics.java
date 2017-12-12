@@ -1,4 +1,4 @@
-package json_objects;
+package models;
 
 /**
  * Created by Anwesha Biswas on 3/12/2017.
