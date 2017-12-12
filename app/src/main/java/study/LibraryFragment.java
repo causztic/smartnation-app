@@ -28,12 +28,12 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import models.MeetingPlaces;
+import models.MeetingPlace;
 
 
 public class LibraryFragment extends Fragment
 {
-    private MeetingPlaces obj;
+    private MeetingPlace obj;
     private ImageView header;
     private TextView occ;
     private BarChart chart;
@@ -62,7 +62,7 @@ public class LibraryFragment extends Fragment
 
         View rootView = inflater.inflate(R.layout.fragment_main3_activity_library, container, false);
 
-        obj = (MeetingPlaces) getArguments().get("LIBRARY");
+        obj = (MeetingPlace) getArguments().get("LIBRARY");
 
         String name= obj.getName();
         String headerUrl=obj.getHeaderImage();

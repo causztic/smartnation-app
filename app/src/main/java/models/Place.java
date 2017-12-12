@@ -1,12 +1,12 @@
 package models;
 
-/**
- * Created by Anwesha Biswas on 2/12/2017.
- */
-
 import java.io.Serializable;
 
-public class FoodPlaces implements Serializable{
+/**
+ * Created by yaojie on 12/12/17.
+ */
+
+public abstract class Place implements Serializable {
     private int id;
     private double longitude,latitude;
     private String name,image,headerImage;
@@ -28,4 +28,5 @@ public class FoodPlaces implements Serializable{
     {
         return headerImage;
     }
+
 }

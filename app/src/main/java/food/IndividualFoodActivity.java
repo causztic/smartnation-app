@@ -34,7 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import redis.RedisConnect;
-import models.FoodPlaces;
+import models.FoodPlace;
 import models.Statistics;
 import java.util.Calendar;
 
@@ -75,7 +75,7 @@ public class IndividualFoodActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         int id = intent.getIntExtra(RecyclerViewAdapter.KEY,0);
-        FoodPlaces location=RecyclerViewAdapter.MainFoodInfoList.get(id);
+        FoodPlace location=RecyclerViewAdapter.MainFoodInfoList.get(id);
 
         String name= location.getName();
         Log.i("anwesharedis",name);

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import models.FoodPlaces;
+import models.FoodPlace;
 
 public class FoodActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
@@ -33,7 +33,7 @@ public class FoodActivity extends AppCompatActivity implements SearchView.OnQuer
     private static final String ENDPOINT="https://floating-forest-82850.herokuapp.com/area/food";
     private RequestQueue requestQueue;
     private Gson gson;
-    List<FoodPlaces> posts=new ArrayList<>();
+    List<FoodPlace> posts=new ArrayList<>();
 
 
     @Override
@@ -62,7 +62,7 @@ public class FoodActivity extends AppCompatActivity implements SearchView.OnQuer
     private final Response.Listener<String> onPostsLoaded = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            posts = Arrays.asList(gson.fromJson(response, FoodPlaces[].class));
+            posts = Arrays.asList(gson.fromJson(response, FoodPlace[].class));
 
             Log.i("PostActivity", posts.size() + " posts loaded.");
             adapt=new RecyclerViewAdapter(posts);
@@ -98,8 +98,8 @@ public class FoodActivity extends AppCompatActivity implements SearchView.OnQuer
 
 
         newText=newText.toLowerCase();
-        ArrayList<FoodPlaces> newlist=new ArrayList<>();
-        for(FoodPlaces info: RecyclerViewAdapter.OriginalFoodInfoList)
+        ArrayList<FoodPlace> newlist=new ArrayList<>();
+        for(FoodPlace info: RecyclerViewAdapter.OriginalFoodInfoList)
         {
             String name=info.getName().toLowerCase();
             Log.i("anwesha","all names="+name);

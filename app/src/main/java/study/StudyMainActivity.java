@@ -15,7 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import models.MeetingPlaces;
+import models.MeetingPlace;
 
 import com.example.anweshabiswas.smartnation.R;
 import com.google.gson.Gson;
@@ -31,9 +31,9 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
     private static final String ENDPOINT="https://floating-forest-82850.herokuapp.com/area/meeting";
     private RequestQueue requestQueue;
     private Gson gson;
-    private  List<MeetingPlaces> posts=new ArrayList<>();
-    private ArrayList<MeetingPlaces> library;
-    private ArrayList<MeetingPlaces> meeting;
+    private  List<MeetingPlace> posts=new ArrayList<>();
+    private ArrayList<MeetingPlace> library;
+    private ArrayList<MeetingPlace> meeting;
     private ImageButton libraryButton;
     private ImageButton meetingButton;
     private ProgressBar progressBar;
@@ -73,9 +73,9 @@ public class StudyMainActivity extends AppCompatActivity implements View.OnClick
         public void onResponse(String response) {
             hasLoaded = true;
             progressBar.setVisibility(View.GONE);
-            posts = Arrays.asList(gson.fromJson(response, MeetingPlaces[].class));
+            posts = Arrays.asList(gson.fromJson(response, MeetingPlace[].class));
 
-            for(MeetingPlaces a:posts)
+            for(MeetingPlace a:posts)
             {
                 if(a.getMeetingCategory().equalsIgnoreCase("library"))
                     library.add(a);

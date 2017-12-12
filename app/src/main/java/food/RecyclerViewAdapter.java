@@ -30,7 +30,7 @@ import com.example.anweshabiswas.smartnation.R;
 
 import java.util.List;
 
-import models.FoodPlaces;
+import models.FoodPlace;
 
 
 /**
@@ -40,8 +40,8 @@ import models.FoodPlaces;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     public static Context context;
-    public static List<FoodPlaces> MainFoodInfoList=new ArrayList<>();
-    public static List<FoodPlaces> OriginalFoodInfoList=new ArrayList<>();
+    public static List<FoodPlace> MainFoodInfoList=new ArrayList<>();
+    public static List<FoodPlace> OriginalFoodInfoList=new ArrayList<>();
 
     public static final String KEY="Info";
 
@@ -55,7 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     }
 
-    public RecyclerViewAdapter(List<FoodPlaces> TempList)
+    public RecyclerViewAdapter(List<FoodPlace> TempList)
     {
 
         MainFoodInfoList=TempList;
@@ -66,7 +66,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     }
 
-    public RecyclerViewAdapter(Context context, List<FoodPlaces> TempList)
+    public RecyclerViewAdapter(Context context, List<FoodPlace> TempList)
     {
 
         MainFoodInfoList=TempList;
@@ -165,7 +165,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
 
-    public void setFilter(ArrayList<FoodPlaces> list)
+    public void setFilter(ArrayList<FoodPlace> list)
     {
         if(list.size()==0)
             notifyDataSetChanged();

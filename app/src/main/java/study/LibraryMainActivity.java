@@ -15,7 +15,7 @@ import com.example.anweshabiswas.smartnation.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.MeetingPlaces;
+import models.MeetingPlace;
 
 public class LibraryMainActivity extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class LibraryMainActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
-    private ArrayList<MeetingPlaces> list;
+    private ArrayList<MeetingPlace> list;
     private List<Fragment> libraryFragments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,11 @@ public class LibraryMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main3_library);
 
         Intent i = getIntent();
-        list = (ArrayList<MeetingPlaces>) i
+        list = (ArrayList<MeetingPlace>) i
                 .getSerializableExtra("LIBRARY");
         libraryFragments = new ArrayList<>();
 
-        for (MeetingPlaces item: list){
+        for (MeetingPlace item: list){
             LibraryFragment lf = new LibraryFragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("LIBRARY", item);
