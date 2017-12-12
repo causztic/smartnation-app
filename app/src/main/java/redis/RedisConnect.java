@@ -49,7 +49,10 @@ public class RedisConnect {
             String value;
             if(!key.equalsIgnoreCase("55:quiet")) {
                 value = connection1.get("stat:" + key + ":latest");
-                occ.setText(key + ": " + value + " people");
+                if (value != null)
+                    occ.setText(key + ": " + value + " people");
+                else
+                    occ.setText("Data not available.");
             }
             else {
                 value = connection1.get(key);
