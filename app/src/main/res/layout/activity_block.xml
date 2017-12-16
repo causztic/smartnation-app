@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/QuietStudy"
+                android:layout_alignParentStart="true"
                 android:padding="10dp"
                 android:textStyle="bold"
                 android:textAllCaps="true"
@@ -27,20 +24,22 @@
                 android:layout_height="wrap_content"
                 android:text="Quiet study rooms"
                 android:background="#005662"
-                android:textColor="@color/White"/>
+                android:textColor="@color/White" />
 
             <CheckBox
                 android:id="@+id/quietCheck"
-                android:layout_centerInParent="true"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"/>
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:visibility="visible"
+                android:buttonTint="@color/White"/>
+
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:background="#00838f"
@@ -49,7 +48,6 @@
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/Quiet_Study_lvl2"
                 android:src="@drawable/quietstudyrm" />
 
             <HorizontalScrollView
@@ -64,7 +62,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="L2"
@@ -80,9 +77,7 @@
                         android:layout_gravity="center"
                         android:text="OCCUPIED"
                         android:textColor="@color/White"/>
-
                 </LinearLayout>
-
             </HorizontalScrollView>
         </LinearLayout>
     </LinearLayout>
@@ -95,8 +90,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/GroupStudy"
                 android:padding="10dp"
@@ -105,17 +100,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Group study rooms"
+                android:layout_alignParentStart="true"
                 android:background="#003c8f"
                 android:textColor="@color/White"
                 />
 
             <CheckBox
                 android:id="@+id/groupCheck"
-                android:layout_width="50dp"
-                android:layout_centerVertical="true"
-                android:layout_height="50dp"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
+                android:buttonTint="@color/White"
                 />
 
         </RelativeLayout>
@@ -123,7 +120,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:background="#1565c0"
@@ -200,7 +197,6 @@
                 android:padding="10dp"
                 android:layout_alignParentStart="true"
                 android:textStyle="bold"
-                android:layout_alignParentLeft="true"
                 android:textAllCaps="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -208,19 +204,19 @@
                 android:background="#4527a0"
                 android:textColor="@color/White"/>
             <CheckBox
-                android:layout_toStartOf="@+id/Recreation"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/recCheck"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:buttonTint="@color/White"
                 />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:background="#7953d2"
